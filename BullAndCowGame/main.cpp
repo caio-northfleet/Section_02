@@ -10,6 +10,7 @@ void PrintIntro();
 void PlayGame();
 FText GetValidGuess();
 bool AskToPlayAgain();
+void PrintGameSummary();
 
 
 FBullCowGame BCGame;
@@ -35,7 +36,6 @@ void PrintIntro()
 	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength();
 	std::cout << " letter isogram I'm thinking of?" << std::endl;
 	std::cout << std::endl;
-	return;
 }
 
 
@@ -53,7 +53,7 @@ void PlayGame()
 		std::cout << std::endl << std::endl;
 	}
 
-	return;
+	PrintGameSummary();
 }
 
 
@@ -92,9 +92,14 @@ FText GetValidGuess()
 
 bool AskToPlayAgain()
 {
-	std::cout << "Do you want to play again (y/n)? ";
+	std::cout << "Do you want to play again with the same hidden word (y/n)? ";
 	FText Response = "";
 	std::getline(std::cin, Response);
 	
 	return (Response[0] == 'y' || Response[0] == 'Y');
+}
+
+void PrintGameSummary()
+{
+	std::cout << (BCGame.IsGameWon() ? "WELL DONE - YOU WIN!" : "Better luck next time!") << std::endl;
 }
